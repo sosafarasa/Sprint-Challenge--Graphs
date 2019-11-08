@@ -28,7 +28,7 @@ class Stack():
         self.stack.append(value)
 
     def remove(self):
-        if self.size > 0:
+        if self.size() > 0:
             return self.stack.pop()
         else:
             return None
@@ -53,14 +53,127 @@ while len(visited) < 500:
     if current not in visited:
         exits = {}
         
-        for exit in player.currentRoom.getExits():
-            exits[exit] = '?'
+        for exitt in player.currentRoom.getExits():
+            exits[exitt] = '?'
 
         visited[current] = exits
     
     exits = visited[current]
 
+    # check if 'nsew' is an exit and has not been visited
+        # move player and add to traversalPath list    
+    if 'n' in exits and exits['n'] == '?':
+        player.travel('n')
+        traversalPath.append('n')
 
+        # create variable for the next room and assing id of the current room
+        next_room = current
+
+        # set id of next room to exits['nsew']
+        exits['n'] = next_room
+
+        # repeat the visited process with next room
+        if next_room not in visited:
+            next_room_exits = {}
+
+            for exitt in player.currentRoom.getExits():
+                next_room_exits[exitt] = '?'
+
+            next_room_exits['s'] = current
+
+            visited[next_room] = next_room_exits
+        else:
+            visited[next_room] ['s'] = current
+
+        # add 'nsew' to the stack
+        s.add('s')
+
+    elif 's' in exits and exits['s'] == '?':
+        player.travel('s')
+        traversalPath.append('s')
+
+        # create variable for the next room and assing id of the current room
+        next_room = current
+        
+        # set id of next room to exits['nsew']
+        exits['s'] = next_room
+
+        # repeat the visited process with next room
+        if next_room not in visited:
+            next_room_exits = {}
+
+            for exitt in player.currentRoom.getExits():
+                next_room_exits[exitt] = '?'
+
+            next_room_exits['n'] = current
+
+            visited[next_room] = next_room_exits
+        else:
+            visited[next_room] ['n'] = current
+
+        # add 'nsew' to the stack
+        s.add('n')
+    
+    elif 'e' in exits and exits['e'] == '?':
+        player.travel('e')
+        traversalPath.append('e')
+
+        # create variable for the next room and assing id of the current room
+        next_room = current
+        
+        # set id of next room to exits['nsew']
+        exits['e'] = next_room
+
+        # repeat the visited process with next room
+        if next_room not in visited:
+            next_room_exits = {}
+
+            for exitt in player.currentRoom.getExits():
+                next_room_exits[exitt] = '?'
+
+            next_room_exits['w'] = current
+
+            visited[next_room] = next_room_exits
+        else:
+            visited[next_room] ['w'] = current
+
+        # add 'nsew' to the stack
+        s.add('w')
+    
+    elif 'w' in exits and exits['w'] == '?':
+        player.travel('w')
+        traversalPath.append('w')
+
+        # create variable for the next room and assing id of the current room
+        next_room = current
+        
+        # set id of next room to exits['nsew']
+        exits['w'] = next_room
+
+        # repeat the visited process with next room
+        if next_room not in visited:
+            next_room_exits = {}
+
+            for exitt in player.currentRoom.getExits():
+                next_room_exits[exitt] = '?'
+
+            next_room_exits['e'] = current
+
+            visited[next_room] = next_room_exits
+        else:
+            visited[next_room] ['e'] = current
+
+        # add 'nsew' to the stack
+        s.add('e')
+
+    else:
+        back = s.remove()
+
+        if back is None:
+            break
+        
+        player.travel(back)
+        traversalPath.append(back)
 
 
 
