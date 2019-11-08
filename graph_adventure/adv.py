@@ -37,9 +37,32 @@ class Stack():
         return len(self.stack)
 
 
+traversalPath = []
+
+visited = {}
+
+s = Stack()
 
 
-traversalPath = ['n', 's']
+while len(visited) < 500:
+    # setting the current room
+    current = player.currentRoom.id
+
+    # check if the current room has been visited yet
+    # get all available exits in the room
+    if current not in visited:
+        exits = {}
+        
+        for exit in player.currentRoom.getExits():
+            exits[exit] = '?'
+
+        visited[current] = exits
+    
+    exits = visited[current]
+
+
+
+
 
 
 # TRAVERSAL TEST
